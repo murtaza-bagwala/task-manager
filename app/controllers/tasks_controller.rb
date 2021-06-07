@@ -2,14 +2,14 @@ class TasksController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-    @tasks = @current_user.tasks
+    @tasks = current_user.tasks
     render json: {
     	tasks: @tasks
     }, status: :ok
   end
 
   def create
-    @task = @current_user.tasks.create(task_params)
+    @task = current_user.tasks.create(task_params)
     render json: {
     		task: @task
     }, status: :created
