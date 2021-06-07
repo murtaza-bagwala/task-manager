@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_16_221309) do
+ActiveRecord::Schema.define(version: 2021_06_07_152937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2019_02_16_221309) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "content"
+    t.datetime "deadline"
+    t.uuid "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,4 +75,5 @@ ActiveRecord::Schema.define(version: 2019_02_16_221309) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "tasks", "users"
 end

@@ -45,6 +45,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "foreman", require: false
+  gem 'pry-rails', '~> 0.3.4'
 end
 
 group :test do
@@ -90,3 +91,7 @@ gem "administrate"
 
 # Error monitoring for Rails
 gem "honeybadger", "~> 4.8"
+
+gem 'jwt', '~> 1.5', '>= 1.5.4'
+
+gem 'bcrypt', '~> 3.1', '>= 3.1.16'

@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: "registrations" }
 
-  # Authentication
-  devise_scope :user do
-    get "/login" => "devise/sessions#new", as: :login
-    get "/logout" => "sessions#destroy", :as => :logout
-    get "/signup" => "registrations#new", :as => :signup
-    scope "my" do
-      get "profile", to: "registrations#edit"
-      put "profile/update", to: "registrations#update"
-    end
+  scope :api, defaults: { format: :json } do
+    devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
+                       path_names: { sign_in: :login }
+    resources :tasks                   
   end
+
+
 
   authenticated :user do
     resources :dashboard, only: [:index] do
