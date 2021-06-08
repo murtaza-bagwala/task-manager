@@ -189,6 +189,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -364,6 +366,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry-rails (~> 0.3.4)
   puma (< 6)
+  rack-cors (~> 1.1.1)
   rails (~> 6.0)
   rspec-rails (~> 5.0, >= 5.0.1)
   rubocop
