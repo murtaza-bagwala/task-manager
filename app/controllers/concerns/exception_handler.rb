@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExceptionHandler
   extend ActiveSupport::Concern
 
@@ -27,5 +29,4 @@ module ExceptionHandler
   def json_response(object, status = :ok)
     render json: object, status: status
   end
-
 end

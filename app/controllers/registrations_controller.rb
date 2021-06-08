@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
 
@@ -9,12 +11,12 @@ class RegistrationsController < Devise::RegistrationsController
     else
       render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
     end
-
   end
 
   protected
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :avatar])
-    end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name avatar])
+  end
 end
