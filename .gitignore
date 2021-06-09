@@ -30,6 +30,7 @@ spec/log/
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+yarn-error.log
 
 # Editors
 .vscode
@@ -39,4 +40,5 @@ yarn-debug.log*
 /config/secrets.yml
 /gem_path
 package-lock.json
+yarn.lock
 

@@ -15,12 +15,6 @@ Rails.application.routes.draw do
     end
   end
 
-  unauthenticated do
-    as :user do
-      root to: 'devise/sessions#new', as: :unauthenticated_root
-    end
-  end
-
   resources :dashboard do
     collection do
       get :about
@@ -39,6 +33,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'dashboard#home'
+  root to: 'static#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

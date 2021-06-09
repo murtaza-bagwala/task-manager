@@ -1,0 +1,59 @@
+.todo-app {
+	font-family: sans-serif;
+}
+
+.app {
+  display: grid;
+  place-items: center;
+  height: 125vh;
+  background-color: #dadbd3
+}
+
+h1 {
+  font-size: 15vh;
+  font-weight: lighter;
+  font-family: sans-serif;
+  color: palevioletred;
+}
+
+.app__container {
+	padding: 20px;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/** add todo **/
+.add-todo {
+	margin-left: 0.5rem;
+}
+
+/** todo list **/
+.todo-list {
+	margin-top: 1rem;
+	text-align: left;
+	list-style: none;
+}
+
+/** todo item **/
+.todo-item {
+	font-family: monospace;
+	cursor: pointer;
+	line-height: 1.5;
+}
+.todo-item__text--completed {
+	text-decoration: line-through;
+	color: lightgray;
+}
+
+/** visibility filters **/
+.filter {
+	padding: 0.3rem 0;
+	margin: 0 0.3rem;
+	cursor: pointer;
+}
+.filter--active {
+	border-bottom: 1px solid black;
+}
+
