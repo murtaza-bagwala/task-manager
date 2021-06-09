@@ -174,7 +174,7 @@ export default function SignIn({ setToken }) {
               <Link
                 component="button"
                 onClick={() => {
-								  setShowSignup(true);
+                  setShowSignup(true);
                 }}
               >
                 Don't have an account? Sign Up

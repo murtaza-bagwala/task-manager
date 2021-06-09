@@ -71,11 +71,11 @@ export const UpdateTaskModal = ({
             fullWidth
             margin="normal"
             value={
-							!isEmpty(content)
-							  ? content.input
-							  : !isEmpty(selectedTask)
-							    ? selectedTask.content
-							    : ''
+            !isEmpty(content)
+              ? content.input
+              : !isEmpty(selectedTask)
+                ? selectedTask.content
+                : ''
 						}
             onChange={(e) => updateInput(e.target.value)}
             onClose={handleClose}

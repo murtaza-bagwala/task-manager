@@ -1,5 +1,7 @@
+const API_HOST = 'http://localhost:3000/api';
+
 export async function list(token) {
-  return fetch('http://localhost:3001/api/tasks', {
+  return fetch(`${API_HOST}/tasks`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +14,7 @@ export async function list(token) {
 }
 
 export async function create(token, task) {
-  return fetch('http://localhost:3001/api/tasks', {
+  return fetch(`${API_HOST}/tasks`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ export async function create(token, task) {
 
 export async function update(token, task) {
   debugger;
-  return fetch(`http://localhost:3001/api/tasks/${task.id}`, {
+  return fetch(`${API_HOST}/tasks/${task.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +44,7 @@ export async function update(token, task) {
 
 export async function destroy(token, taskId) {
   debugger;
-  return fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+  return fetch(`${API_HOST}/tasks/${taskId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

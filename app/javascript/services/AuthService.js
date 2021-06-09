@@ -1,5 +1,7 @@
+const API_HOST = 'http://localhost:3000/api';
+
 export async function loginUser(credentials) {
-  return fetch('http://localhost:3001/api/users/login', {
+  return fetch(`${API_HOST}/users/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -9,7 +11,7 @@ export async function loginUser(credentials) {
 }
 
 export async function registerUser(credentials) {
-  return fetch('http://localhost:3001/api/users', {
+  return fetch(`${API_HOST}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
