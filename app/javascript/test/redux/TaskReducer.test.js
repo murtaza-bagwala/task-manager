@@ -36,6 +36,8 @@ describe('editTaskReducer', () => {
     const payload = {
       id: 1,
       content: 'wash cloth',
+      deadline: '2021-06-01T10:30',
+      completed: true,
     };
 
     const action = taskActions.editTask(payload);
@@ -44,6 +46,8 @@ describe('editTaskReducer', () => {
     initialState = newState;
 
     expect(newState.byIds[1].content).toEqual(payload.content);
+    expect(newState.byIds[1].deadline).toEqual(payload.deadline);
+    expect(newState.byIds[1].completed).toEqual(payload.completed);
   });
 });
 

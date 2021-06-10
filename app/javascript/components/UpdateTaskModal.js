@@ -1,45 +1,67 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import React, { useState } from 'react';
-
+import React from 'react';
+import { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
+import Checkbox from '@material-ui/core/Checkbox';
+import CancelIcon from '@material-ui/icons/Cancel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import { modifyTask, setSelectedTask } from '../redux/actions';
+import { connect } from 'react-redux';
 
-const isEmpty = (object) => Object.keys(object).length === 0;
+const isEmpty = object => {
+  return !object || Object.keys(object).length === 0;
+};
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+    padding: theme.spacing(2, 4, 3)
+  }
 }));
 
 export const UpdateTaskModal = ({
   selectedTask,
   modifyTask,
-  setSelectedTask,
+  setSelectedTask
 }) => {
   const classes = useStyles();
+
   const [content, setContent] = useState({});
 
-  const updateInput = (input) => {
-    setContent({ input });
+  const updateContent = taskContent => {
+    setContent({ taskContent });
   };
 
-  const handleEditTask = (e) => {
-    if (e.keyCode === 13) {
+  const toggleCheckbox = completed => {
+    const token = sessionStorage.getItem('token');
+    modifyTask(token, {
+      ...selectedTask,
+      completed
+    });
+  };
+
+  const updateDeadline = deadline => {
+    const token = sessionStorage.getItem('token');
+    modifyTask(token, {
+      ...selectedTask,
+      deadline
+    });
+  };
+
+  const handleEditContent = keyCode => {
+    if (keyCode === 13 && (content.taskContent && content.taskContent.length)) {
+      const { taskContent } = content;
       const token = sessionStorage.getItem('token');
       modifyTask(token, {
-        id: selectedTask.id,
-        content: e.target.value,
+        ...selectedTask,
+        content: taskContent
       });
-      setSelectedTask({});
-      setContent({});
     }
   };
 
@@ -52,47 +74,80 @@ export const UpdateTaskModal = ({
     return null;
   }
 
+
   return (
     <div>
       <Modal
-        open
+        open={true}
         onClose={handleClose}
         style={{
-				  display: 'flex',
-				  alignItems: 'center',
-				  justifyContent: 'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <div className={classes.paper}>
+          <div style={{ 'padding-left': '400px' }}>
+            <CancelIcon
+              variant='contained'
+              color='primary'
+              onClick={handleClose}
+            />
+          </div>
           <TextField
-            id="standard-full-width"
+            id='standard-full-width'
             style={{ margin: 8 }}
-            placeholder="What needs to be done?"
+            placeholder='What needs to be done?'
             fullWidth
-            margin="normal"
+            margin='normal'
             value={
-            !isEmpty(content)
-              ? content.input
-              : !isEmpty(selectedTask)
-                ? selectedTask.content
-                : ''
-						}
-            onChange={(e) => updateInput(e.target.value)}
+              !isEmpty(content) ? content.taskContent : selectedTask.content
+            }
+            onChange={e => updateContent(e.target.value)}
             onClose={handleClose}
-            onKeyDown={handleEditTask}
+            onKeyDown={e => handleEditContent(e.keyCode)}
           />
+          <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={selectedTask.completed}
+                  onChange={e => toggleCheckbox(e.target.checked)}
+                  name='checkedB'
+                  color='primary'
+                />
+              }
+              label='Completed'
+            />
+          </div>
+          <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
+            <TextField
+              id='datetime-local'
+              label='Set Deadline'
+              type='datetime-local'
+              defaultValue={
+                selectedTask.deadline
+                  ? selectedTask.deadline.replace(/.\d+Z$/g, '')
+                  : '2021-06-01T10:30'
+              }
+              className={classes.textField}
+              onChange={e => updateDeadline(e.target.value)}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </div>
         </div>
       </Modal>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  debugger;
+const mapStateToProps = state => {
   const { selectedTask } = state.tasks;
   return { selectedTask };
 };
 
 export default connect(mapStateToProps, { modifyTask, setSelectedTask })(
-  UpdateTaskModal,
+  UpdateTaskModal
 );

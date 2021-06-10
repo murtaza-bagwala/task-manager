@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :task do
     content { 'MyText' }
-    deadline { '2021-06-07 20:59:38' }
+    deadline { Time.now.strftime('%FT%R') }
     user { nil }
   end
 end

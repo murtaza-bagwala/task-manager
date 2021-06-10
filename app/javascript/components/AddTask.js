@@ -12,7 +12,7 @@ export const AddTask = ({ saveTask }) => {
   };
 
   const handleAddTask = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && (state.input && state.input.length)) {
       const token = sessionStorage.getItem('token');
       saveTask(token, {
         content: state.input,
@@ -32,6 +32,8 @@ export const AddTask = ({ saveTask }) => {
       onChange={(e) => updateInput(e.target.value)}
       value={state.input}
       onKeyDown={handleAddTask}
+      helperText={!state.input ? 'Task description cannot be empty!' : ''}
+      error={!state.input ? 'Task description cannot be empty!' : ''}
     />
   );
 };
