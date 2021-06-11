@@ -3,7 +3,11 @@ import * as actionTypes from '../../redux/actionTypes';
 
 describe('addTaskSuccess', () => {
   it('should create a ADD_TASK action', () => {
-    const content = 'cook Meal';
+    const task = {
+    	content: 'cook Meal',
+    	id: 1,
+    };
+
     const expected = {
       type: actionTypes.ADD_TASK,
       payload: {
@@ -12,7 +16,7 @@ describe('addTaskSuccess', () => {
       },
     };
 
-    const action = taskActions.addTask(content);
+    const action = taskActions.addTask(task);
     expect(action).toEqual(expected);
   });
 });

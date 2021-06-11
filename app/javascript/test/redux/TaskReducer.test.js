@@ -19,15 +19,18 @@ let initialState = {
 
 describe('addTaskReducer', () => {
   it('should create a new task when passed ADD_TASK action is passed', () => {
-    const content = 'go out';
+    const task = {
+    	id: 1,
+    	content: 'go out',
+    };
 
-    const action = taskActions.addTask(content);
+    const action = taskActions.addTask(task);
     const newState = taskReducer(initialState, action);
 
     initialState = newState;
 
     expect(newState.allIds.length).toEqual(3);
-    expect(newState.byIds[1].content).toEqual(content);
+    expect(newState.byIds[1].content).toEqual(task.content);
   });
 });
 

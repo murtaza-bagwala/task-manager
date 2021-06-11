@@ -9,7 +9,7 @@ export async function list(token) {
     },
   }).then((response) => {
     if (response.ok) return response.json();
-    throw new Error('Network response was not ok.');
+    throw response;
   });
 }
 
@@ -23,7 +23,7 @@ export async function create(token, task) {
     body: JSON.stringify({ task }),
   }).then((response) => {
     if (response.ok) return response.json();
-    throw new Error('Network response was not ok.');
+    throw response;
   });
 }
 
@@ -38,7 +38,7 @@ export async function update(token, task) {
     body: JSON.stringify({ task }),
   }).then((response) => {
     if (response.ok) return response.json();
-    throw new Error('Network response was not ok.');
+    throw response;
   });
 }
 
@@ -52,6 +52,6 @@ export async function destroy(token, taskId) {
     },
   }).then((response) => {
     if (response.ok) return response.json();
-    throw new Error('Network response was not ok.');
+    throw response;
   });
 }
