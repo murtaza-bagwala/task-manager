@@ -31,6 +31,7 @@ export const UpdateTaskModal = ({
   const classes = useStyles();
 
   const [content, setContent] = useState({});
+  const [error, setError] = useState(false);
 
   const updateContent = (taskContent) => {
     setContent({ taskContent });
@@ -46,11 +47,18 @@ export const UpdateTaskModal = ({
   };
 
   const updateDeadline = (deadline) => {
-    const token = sessionStorage.getItem('token');
-    modifyTask(token, {
-      ...selectedTask,
-      deadline,
-    });
+    const currentDate = new Date();
+    const taskDeadline = new Date(deadline);
+    if (taskDeadline > currentDate ) {
+      const token = sessionStorage.getItem('token');
+      modifyTask(token, {
+        ...selectedTask,
+        deadline,
+      });
+      setError(false)
+    } else {
+      setError(true)
+    }
   };
 
   const handleEditContent = (keyCode) => {
@@ -133,6 +141,8 @@ export const UpdateTaskModal = ({
               InputLabelProps={{
                 shrink: true,
               }}
+              helperText={error ? 'Deadline should be greater than the currentDate' : ''}
+              error={error ? 'Deadline should be greater than the currentDate' : ''}
             />
           </div>
         </div>
