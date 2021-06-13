@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders AddComment Successfully 1`] = `
+<div
+  className="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth"
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "margin": 8,
+    }
+  }
+>
+  <div
+    className="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+    onClick={[Function]}
+  >
+    <input
+      aria-describedby="standard-full-width-helper-text"
+      aria-invalid="Comment cannot be empty!"
+      autoFocus={false}
+      className="MuiInputBase-input MuiInput-input"
+      disabled={false}
+      id="standard-full-width"
+      onAnimationStart={[Function]}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>
+  <p
+    className="MuiFormHelperText-root Mui-error"
+    id="standard-full-width-helper-text"
+  >
+    Comment cannot be empty!
+  </p>
+</div>
+`;

@@ -5,6 +5,7 @@ import {
   EDIT_TASK,
   SET_SELECTED_TASK,
   LOAD_TASKS,
+  ADD_COMMENT_TO_TASK,
 } from '../actionTypes';
 
 const initialState = {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
           [id]: {
             content,
             completed: false,
+            comments: [],
           },
         },
       };
@@ -60,6 +62,7 @@ export default function (state = initialState, action) {
       const {
         id, content, deadline, completed,
       } = action.payload;
+      const { comments } = state.selectedTask;
       const selectedTask = action.payload;
       return {
         ...state,
@@ -72,7 +75,10 @@ export default function (state = initialState, action) {
             completed,
           },
         },
-        selectedTask,
+        selectedTask: {
+          ...selectedTask,
+          comments,
+        },
       };
     }
     case SET_SELECTED_TASK: {
@@ -92,6 +98,23 @@ export default function (state = initialState, action) {
         ...state,
         byIds,
         allIds: action.tasks.map((task) => task.id),
+      };
+    }
+    case ADD_COMMENT_TO_TASK: {
+      const { id, commentId } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            comments: [...state.byIds[id].comments, commentId],
+          },
+        },
+        selectedTask: {
+          ...state.selectedTask,
+          comments: [...state.selectedTask.comments, commentId],
+        },
       };
     }
     default:

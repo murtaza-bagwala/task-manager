@@ -13,8 +13,8 @@ RSpec.describe TasksController, type: :controller do
   describe '#index' do
     context 'When index is called for the current user' do
       it 'should return status as 200 with lists of all the tasks' do
-        task1 = FactoryBot.create(:task, user: user)
-        task2 = FactoryBot.create(:task, user: user)
+        task1 = FactoryBot.create(:task_with_comments, user: user)
+        task2 = FactoryBot.create(:task_with_comments, user: user)
 
         get :index, { format: :json }
         expect(response).to have_http_status(200)

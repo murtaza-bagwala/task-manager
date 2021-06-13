@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
                        path_names: { sign_in: :login }
-    resources :tasks
+    resources :tasks do
+      resources :comments, only: [:create]
+    end
   end
 
   authenticated :user do

@@ -3,3 +3,5 @@ export const VISIBILITY_FILTERS = {
   COMPLETED: 'completed',
   INCOMPLETE: 'incomplete',
 };
+
+export const API_HOST = 'http://localhost:3000/api';

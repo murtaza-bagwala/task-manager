@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders CommentList Successfully 1`] = `
+<div
+  className="MuiPaper-root makeStyles-paper-3 MuiPaper-elevation1"
+>
+  <ul
+    className="MuiList-root makeStyles-list-4 MuiList-padding"
+  />
+</div>
+`;

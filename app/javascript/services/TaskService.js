@@ -1,4 +1,4 @@
-const API_HOST = 'http://localhost:3000/api';
+import { API_HOST } from '../constants';
 
 export async function list(token) {
   return fetch(`${API_HOST}/tasks`, {
@@ -28,7 +28,6 @@ export async function create(token, task) {
 }
 
 export async function update(token, task) {
-  debugger;
   return fetch(`${API_HOST}/tasks/${task.id}`, {
     method: 'PUT',
     headers: {
@@ -43,7 +42,6 @@ export async function update(token, task) {
 }
 
 export async function destroy(token, taskId) {
-  debugger;
   return fetch(`${API_HOST}/tasks/${taskId}`, {
     method: 'DELETE',
     headers: {

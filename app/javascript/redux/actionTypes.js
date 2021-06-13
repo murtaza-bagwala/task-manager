@@ -5,3 +5,6 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const EDIT_TASK = 'EDIT_TASK';
 export const SET_SELECTED_TASK = 'SET_SELECTED_TASK';
 export const LOAD_TASKS = 'LOAD_TASKS';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const ADD_COMMENT_TO_TASK = 'ADD_COMMENT_TO_TASK';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';

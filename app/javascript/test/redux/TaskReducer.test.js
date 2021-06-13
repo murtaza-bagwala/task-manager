@@ -7,13 +7,18 @@ let initialState = {
     2: {
       completed: false,
       content: 'cook Meal',
+      comments: [],
     },
     3: {
       completed: false,
       content: 'watch Movie',
+      comments: [],
     },
   },
   allIds: [2, 3],
+  selectedTask: {
+  	comments: [],
+  },
 
 };
 
@@ -92,5 +97,19 @@ describe('setSelectedTaskReducer', () => {
     const newState = taskReducer(initialState, action);
 
     expect(newState.selectedTask).toEqual(task);
+  });
+});
+
+describe('addCommentToTaskReducer', () => {
+  it('should add the created comment id to the current task when ADD_COMMENT_TO_TASK action is passed', () => {
+    const taskId = 2;
+    const commentId = 1;
+
+    const action = taskActions.addCommentToTask(taskId, commentId);
+
+    const newState = taskReducer(initialState, action);
+
+    expect(newState.byIds[taskId].comments.length).toEqual(1);
+    expect(newState.byIds[taskId].comments[0]).toEqual(commentId);
   });
 });

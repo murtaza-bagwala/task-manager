@@ -1,4 +1,4 @@
-const API_HOST = 'http://localhost:3000/api';
+import { API_HOST } from '../constants';
 
 export async function loginUser(credentials) {
   return fetch(`${API_HOST}/users/login`, {

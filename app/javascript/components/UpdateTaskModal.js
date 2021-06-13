@@ -6,8 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import CancelIcon from '@material-ui/icons/Cancel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 import { connect } from 'react-redux';
+import CommentList from './CommentList';
+import AddComment from './AddComment';
+
 import { modifyTask, setSelectedTask } from '../redux/actions';
 
 const isEmpty = (object) => !object || Object.keys(object).length === 0;
@@ -39,7 +41,6 @@ export const UpdateTaskModal = ({
 
   const toggleCheckbox = (completed) => {
     const token = sessionStorage.getItem('token');
-    debugger;
     modifyTask(token, {
       ...selectedTask,
       completed,
@@ -62,7 +63,7 @@ export const UpdateTaskModal = ({
   };
 
   const handleEditContent = (keyCode) => {
-    if (keyCode === 13 && (content.taskContent && content.taskContent.length)) {
+    if (keyCode === 13 && content.taskContent && content.taskContent.length) {
       const { taskContent } = content;
       const token = sessionStorage.getItem('token');
       modifyTask(token, {
@@ -144,6 +145,10 @@ export const UpdateTaskModal = ({
               helperText={error ? 'Deadline should be greater than the currentDate' : ''}
               error={error ? 'Deadline should be greater than the currentDate' : ''}
             />
+          </div>
+          <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
+            <AddComment taskId={selectedTask.id} />
+            <CommentList />
           </div>
         </div>
       </Modal>

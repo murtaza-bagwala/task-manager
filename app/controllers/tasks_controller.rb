@@ -1,10 +1,16 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
+  include TasksHelper
 
   def index
-    @tasks = current_user.tasks.select(:id, :content, :deadline, :completed)
+    @tasks = current_user.tasks
+    	.select(:id, :content, :deadline, :completed)
+    	.includes(:comments)
+
+   	tasks_with_comments = helpers.tasks_with_comments(@tasks)
+   
     render json: {
-      tasks: @tasks
+      tasks: tasks_with_comments
     }, status: :ok
   end
 

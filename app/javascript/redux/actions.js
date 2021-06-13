@@ -6,11 +6,14 @@ import {
   EDIT_TASK,
   SET_SELECTED_TASK,
   LOAD_TASKS,
+  ADD_COMMENT_TO_TASK,
 } from './actionTypes';
 
 import {
   list, create, destroy, update,
 } from '../services/TaskService';
+
+import { loadComments } from './commentActions';
 
 export const addTask = (task) => ({
   type: ADD_TASK,
@@ -40,6 +43,11 @@ export const setSelectedTask = (task) => ({
   payload: task,
 });
 
+export const addCommentToTask = (taskId, commentId) => ({
+  type: ADD_COMMENT_TO_TASK,
+  payload: { id: taskId, commentId },
+});
+
 export const loadTasks = (tasks) => ({ type: LOAD_TASKS, tasks });
 
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } });
@@ -48,8 +56,15 @@ export function fetchTasks(userToken) {
   return async function (dispatch) {
     try {
       const tasks = await list(userToken);
+      const comments = [];
+      tasks.tasks.forEach((task) => {
+        comments.push(task.comments);
+        task.comments = task.comments.map((comment) => comment.id);
+      });
+      
       if (tasks) {
         dispatch(loadTasks(tasks.tasks));
+        dispatch(loadComments(comments.flat()));
       }
     } catch (error) {
       throw error;
