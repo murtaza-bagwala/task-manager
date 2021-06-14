@@ -161,7 +161,9 @@ export const UpdateTaskModal = ({
           </div>
           <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
             {attachments.map((attachment) => (
-              <a href={`${ATTACHMENT_HOST}/${attachment.url}`} target="_blank" rel="noreferrer">{attachment.name}</a>
+              <span>&nbsp; &nbsp; &nbsp;
+                <a href={`${ATTACHMENT_HOST}/${attachment.url}`} target="_blank" rel="noreferrer">{attachment.name}</a>
+             </span>
             ))}
           </div>
         </div>

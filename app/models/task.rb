@@ -4,9 +4,9 @@ class Task < ApplicationRecord
 
   validate :deadline_cannot_be_in_the_past
 
-  has_many :comments
+  has_many :comments, dependent: :delete_all
 
-  has_many :attachments
+  has_many :attachments, dependent: :delete_all
 
   def deadline_cannot_be_in_the_past
     if deadline.present? && deadline < Date.today
