@@ -9,8 +9,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { connect } from 'react-redux';
 import CommentList from './CommentList';
 import AddComment from './AddComment';
+import AddAttachment from './AddAttachment';
+
+import { getAttachmentsForTask } from '../redux/selectors';
 
 import { modifyTask, setSelectedTask } from '../redux/actions';
+
+import { ATTACHMENT_HOST } from '../constants';
 
 const isEmpty = (object) => !object || Object.keys(object).length === 0;
 
@@ -26,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const UpdateTaskModal = ({
+  attachments,
   selectedTask,
   modifyTask,
   setSelectedTask,
@@ -50,15 +56,15 @@ export const UpdateTaskModal = ({
   const updateDeadline = (deadline) => {
     const currentDate = new Date();
     const taskDeadline = new Date(deadline);
-    if (taskDeadline > currentDate ) {
+    if (taskDeadline > currentDate) {
       const token = sessionStorage.getItem('token');
       modifyTask(token, {
         ...selectedTask,
         deadline,
       });
-      setError(false)
+      setError(false);
     } else {
-      setError(true)
+      setError(true);
     }
   };
 
@@ -150,6 +156,14 @@ export const UpdateTaskModal = ({
             <AddComment taskId={selectedTask.id} />
             <CommentList />
           </div>
+          <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
+            <AddAttachment taskId={selectedTask.id} />
+          </div>
+          <div style={{ 'padding-bottom': '10px', 'padding-up': '10px' }}>
+            {attachments.map((attachment) => (
+              <a href={`${ATTACHMENT_HOST}/${attachment.url}`} target="_blank" rel="noreferrer">{attachment.name}</a>
+            ))}
+          </div>
         </div>
       </Modal>
     </div>
@@ -158,7 +172,11 @@ export const UpdateTaskModal = ({
 
 const mapStateToProps = (state) => {
   const { selectedTask } = state.tasks;
-  return { selectedTask };
+  let attachments = [];
+  if (selectedTask.attachments) {
+    attachments = getAttachmentsForTask(state, selectedTask.attachments);
+  }
+  return { selectedTask, attachments };
 };
 
 export default connect(mapStateToProps, { modifyTask, setSelectedTask })(

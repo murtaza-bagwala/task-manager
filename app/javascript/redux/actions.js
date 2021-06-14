@@ -7,6 +7,7 @@ import {
   SET_SELECTED_TASK,
   LOAD_TASKS,
   ADD_COMMENT_TO_TASK,
+  ADD_ATTACHMENT_TO_TASK,
 } from './actionTypes';
 
 import {
@@ -14,6 +15,8 @@ import {
 } from '../services/TaskService';
 
 import { loadComments } from './commentActions';
+
+import { loadAttachments } from './attachmentActions';
 
 export const addTask = (task) => ({
   type: ADD_TASK,
@@ -48,6 +51,11 @@ export const addCommentToTask = (taskId, commentId) => ({
   payload: { id: taskId, commentId },
 });
 
+export const addAttachmentToTask = (taskId, attachmentId) => ({
+  type: ADD_ATTACHMENT_TO_TASK,
+  payload: { id: taskId, attachmentId },
+});
+
 export const loadTasks = (tasks) => ({ type: LOAD_TASKS, tasks });
 
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } });
@@ -57,14 +65,19 @@ export function fetchTasks(userToken) {
     try {
       const tasks = await list(userToken);
       const comments = [];
+      const attachments = [];
+
       tasks.tasks.forEach((task) => {
         comments.push(task.comments);
+        attachments.push(task.attachments);
         task.comments = task.comments.map((comment) => comment.id);
+        task.attachments = task.attachments.map((attachment) => attachment.id);
       });
-      
+
       if (tasks) {
         dispatch(loadTasks(tasks.tasks));
         dispatch(loadComments(comments.flat()));
+        dispatch(loadAttachments(attachments.flat()));
       }
     } catch (error) {
       throw error;

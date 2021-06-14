@@ -25,7 +25,7 @@ export function saveComment(userToken, taskId, comment) {
   return async function (dispatch) {
     try {
       const createdComment = await create(userToken, taskId, { comment });
-      
+
       if (createdComment) {
         dispatch(addComment(createdComment.comment));
         dispatch(addCommentToTask(taskId, createdComment.comment.id));

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
                        path_names: { sign_in: :login }
     resources :tasks do
       resources :comments, only: [:create]
+      resources :attachments, only: [:create]
     end
   end
 

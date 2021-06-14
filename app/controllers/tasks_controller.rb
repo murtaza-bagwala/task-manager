@@ -5,12 +5,11 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     	.select(:id, :content, :deadline, :completed)
-    	.includes(:comments)
+    	.includes(:comments, :attachments)
 
-   	tasks_with_comments = helpers.tasks_with_comments(@tasks)
-   
+   	tasks_with_comments_and_attachments = helpers.tasks_with_comments_and_attachments(@tasks)
     render json: {
-      tasks: tasks_with_comments
+      tasks: tasks_with_comments_and_attachments
     }, status: :ok
   end
 

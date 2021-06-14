@@ -6,6 +6,7 @@ import {
   SET_SELECTED_TASK,
   LOAD_TASKS,
   ADD_COMMENT_TO_TASK,
+  ADD_ATTACHMENT_TO_TASK,
 } from '../actionTypes';
 
 const initialState = {
@@ -27,6 +28,7 @@ export default function (state = initialState, action) {
             content,
             completed: false,
             comments: [],
+            attachments: [],
           },
         },
       };
@@ -62,7 +64,7 @@ export default function (state = initialState, action) {
       const {
         id, content, deadline, completed,
       } = action.payload;
-      const { comments } = state.selectedTask;
+      const { comments, attachments } = state.selectedTask;
       const selectedTask = action.payload;
       return {
         ...state,
@@ -78,6 +80,7 @@ export default function (state = initialState, action) {
         selectedTask: {
           ...selectedTask,
           comments,
+          attachments,
         },
       };
     }
@@ -114,6 +117,23 @@ export default function (state = initialState, action) {
         selectedTask: {
           ...state.selectedTask,
           comments: [...state.selectedTask.comments, commentId],
+        },
+      };
+    }
+    case ADD_ATTACHMENT_TO_TASK: {
+      const { id, attachmentId } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            attachments: [...state.byIds[id].attachments, attachmentId],
+          },
+        },
+        selectedTask: {
+          ...state.selectedTask,
+          attachments: [...state.selectedTask.attachments, attachmentId],
         },
       };
     }

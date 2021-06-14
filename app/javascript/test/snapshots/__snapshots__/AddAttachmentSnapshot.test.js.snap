@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders AddAttachment Successfully 1`] = `
+<label
+  htmlFor="upload-photo"
+>
+  <input
+    id="upload-photo"
+    name="upload-photo"
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+  <span
+    aria-disabled={false}
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+    onBlur={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <span
+      className="MuiButton-label"
+    >
+      Upload File
+    </span>
+  </span>
+  <span
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    
+  </span>
+</label>
+`;
