@@ -21,14 +21,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_honeybadger_context
-    Honeybadger.context(
-      user_id: current_user&.id,
-      user_email: current_user&.email,
-      url: request.url
-    )
-  end
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :username
   end

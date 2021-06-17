@@ -58,9 +58,9 @@ export const UpdateTaskModal = ({
         open
         onClose={handleClose}
         style={{
-				  display: 'flex',
-				  alignItems: 'center',
-				  justifyContent: 'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <div className={classes.paper}>
@@ -71,12 +71,12 @@ export const UpdateTaskModal = ({
             fullWidth
             margin="normal"
             value={
-            !isEmpty(content)
-              ? content.input
-              : !isEmpty(selectedTask)
-                ? selectedTask.content
-                : ''
-						}
+              !isEmpty(content)
+                ? content.input
+                : !isEmpty(selectedTask)
+                  ? selectedTask.content
+                  : ''
+            }
             onChange={(e) => updateInput(e.target.value)}
             onClose={handleClose}
             onKeyDown={handleEditTask}

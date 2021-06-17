@@ -42,9 +42,6 @@ group :development, :test do
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '>= 3.0.5', '< 3.6'
-  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'foreman', require: false
   gem 'pry-rails', '~> 0.3.4'
@@ -53,24 +50,12 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
-
   # for test coverage report
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   gem 'simplecov', require: false
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-# Patch-level verification for Bundler
-gem 'bundler-audit'
-# Checks Ruby and RubyGems against known security vulnerabilities.
-gem 'ruby_audit'
 # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
 gem 'rubocop'
 gem 'rubocop-performance'
@@ -88,13 +73,6 @@ gem 'jquery-rails'
 
 #  Font-Awesome Sass gem for use in Ruby/Rails projects  https://github.com/FortAwesome/font-awesome-sass
 gem 'font-awesome-sass', '~> 5.15.1'
-
-gem 'image_processing', '~> 1.10'
-
-gem 'administrate'
-
-# Error monitoring for Rails
-gem 'honeybadger', '~> 4.8'
 
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 
