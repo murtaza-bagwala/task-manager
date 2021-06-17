@@ -9,21 +9,18 @@ import { setFilter } from '../redux/actions';
 
 export const VisibilityFilters = ({ activeFilter, setFilter }) => (
   <Paper square>
-    <Tabs
-      indicatorColor="primary"
-      textColor="primary"
-    >
+    <Tabs indicatorColor="primary" textColor="primary">
       {Object.keys(VISIBILITY_FILTERS).map((filterKey) => {
-				  const currentFilter = VISIBILITY_FILTERS[filterKey];
-				  return (
-  <Tab
-    label={filterKey}
-    key={`visibility-filter-${currentFilter}`}
-    onClick={() => {
-							  setFilter(currentFilter);
-    }}
-  />
-				  );
+        const currentFilter = VISIBILITY_FILTERS[filterKey];
+        return (
+          <Tab
+            label={filterKey}
+            key={`visibility-filter-${currentFilter}`}
+            onClick={() => {
+              setFilter(currentFilter);
+            }}
+          />
+        );
       })}
     </Tabs>
   </Paper>
