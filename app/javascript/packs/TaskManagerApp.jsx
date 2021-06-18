@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import AddTask from '../components/AddTask';
 import Logout from '../components/Logout';
 import TaskList from '../components/TaskList';
@@ -9,29 +9,29 @@ import './styles.css';
 import Login from '../components/Login';
 
 export default function TodoApp() {
-	const [token, setToken] = useState();
+  const [token, setToken] = useState();
 
-	if (!token) {
-		return <Login setToken={setToken}></Login>;
-	}
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
 
-	if (token) {
-		sessionStorage.setItem('token', token);
-	}
+  if (token) {
+    sessionStorage.setItem('token', token);
+  }
 
-	return (
-		<div className='app'>
-			<Logout setToken={setToken} />
-			<header>
-				<h1>todos</h1>
-			</header>
-			<div className='app__container'>
-				<React.Fragment>
-					<AddTask />
-					<TaskList />
-					<VisibilityFilters />
-				</React.Fragment>
-			</div>
-		</div>
-	);
+  return (
+    <div className="app">
+      <Logout setToken={setToken} />
+      <header>
+        <h1>todos</h1>
+      </header>
+      <div className="app__container">
+        <>
+          <AddTask />
+          <TaskList />
+          <VisibilityFilters />
+        </>
+      </div>
+    </div>
+  );
 }
