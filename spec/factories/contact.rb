@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :contact do
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    message { "I am not able to signup" }
+    message { 'I am not able to signup' }
   end
 end
