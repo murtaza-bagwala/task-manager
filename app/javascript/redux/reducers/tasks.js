@@ -57,7 +57,10 @@ export default function (state = initialState, action) {
       };
     }
     case EDIT_TASK: {
-      const { id, content } = action.payload;
+      const {
+        id, content, deadline, completed,
+      } = action.payload;
+      const selectedTask = action.payload;
       return {
         ...state,
         byIds: {
@@ -65,8 +68,11 @@ export default function (state = initialState, action) {
           [id]: {
             ...state.byIds[id],
             content,
+            deadline,
+            completed,
           },
         },
+        selectedTask,
       };
     }
     case SET_SELECTED_TASK: {

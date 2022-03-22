@@ -12,13 +12,11 @@ import {
   list, create, destroy, update,
 } from '../services/TaskService';
 
-let nextTaskId = 0;
-
-export const addTask = (content) => ({
+export const addTask = (task) => ({
   type: ADD_TASK,
   payload: {
-    id: ++nextTaskId,
-    content,
+    id: task.id,
+    content: task.content,
   },
 });
 
@@ -64,7 +62,7 @@ export function saveTask(userToken, task) {
     try {
       const createdTask = await create(userToken, task);
       if (createdTask) {
-        dispatch(addTask(createdTask.task.content));
+        dispatch(addTask(createdTask.task));
       }
     } catch (error) {
       throw error;
@@ -73,11 +71,9 @@ export function saveTask(userToken, task) {
 }
 
 export function modifyTask(userToken, task) {
-  debugger;
   return async function (dispatch) {
     try {
       const updatedTask = await update(userToken, task);
-      debugger;
       if (updatedTask) {
         dispatch(editTask(updatedTask.task));
       }
@@ -89,10 +85,8 @@ export function modifyTask(userToken, task) {
 
 export function destroyTask(userToken, taskId) {
   return async function (dispatch) {
-    debugger;
     try {
       await destroy(userToken, taskId);
-      debugger;
       dispatch(deleteTask(taskId));
     } catch (error) {
       throw error;

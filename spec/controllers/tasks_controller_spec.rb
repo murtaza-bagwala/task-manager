@@ -38,6 +38,21 @@ RSpec.describe TasksController, type: :controller do
         expect(response.parsed_body['task']['content']).to eq(payload[:task][:content])
       end
     end
+
+    context 'When create is called with empty content' do
+      it 'should return an error saying invalid attribute' do
+        payload = {
+          task: {
+            content: ''
+          }
+        }
+
+        post :create, params: payload
+
+        expect(response).to have_http_status(422)
+        expect(response.parsed_body['message']).to eq("Validation failed: Content can't be blank")
+      end
+    end
   end
 
   describe '#update' do
@@ -48,7 +63,8 @@ RSpec.describe TasksController, type: :controller do
         payload = {
           task: {
             content: 'watch movie',
-            deadline: ''
+            deadline: Time.now.strftime('%FT%R'),
+            completed: true
           },
           id: task.id
         }
@@ -56,6 +72,27 @@ RSpec.describe TasksController, type: :controller do
         put :update, params: payload
         expect(response).to have_http_status(200)
         expect(response.parsed_body['task']['content']).to eq(payload[:task][:content])
+        expect(response.parsed_body['task']['deadline']).to include(payload[:task][:deadline])
+        expect(response.parsed_body['task']['completed']).to eq(payload[:task][:completed])
+      end
+    end
+
+    context 'When update is called with past deadline' do
+      it 'should return an error with status as 422' do
+        task = FactoryBot.create(:task, user: user)
+
+        payload = {
+          task: {
+            content: 'watch movie',
+            deadline: '2021-06-01T10:30',
+            completed: true
+          },
+          id: task.id
+        }
+
+        put :update, params: payload
+        expect(response).to have_http_status(422)
+        expect(response.parsed_body['message']).to eq("Validation failed: Deadline can't be in the past")
       end
     end
   end

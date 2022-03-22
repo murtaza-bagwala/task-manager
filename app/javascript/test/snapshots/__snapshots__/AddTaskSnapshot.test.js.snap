@@ -11,11 +11,12 @@ exports[`renders AddTask Successfully 1`] = `
   }
 >
   <div
-    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+    className="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
     onClick={[Function]}
   >
     <input
-      aria-invalid={false}
+      aria-describedby="standard-full-width-helper-text"
+      aria-invalid="Task description cannot be empty!"
       autoFocus={false}
       className="MuiInputBase-input MuiInput-input"
       disabled={false}
@@ -29,5 +30,11 @@ exports[`renders AddTask Successfully 1`] = `
       type="text"
     />
   </div>
+  <p
+    className="MuiFormHelperText-root Mui-error"
+    id="standard-full-width-helper-text"
+  >
+    Task description cannot be empty!
+  </p>
 </div>
 `;

@@ -120,7 +120,6 @@ export default function SignIn({ setToken }) {
       </Container>
     );
   }
-  debugger;
 
   return (
     <Container component="main" maxWidth="xs">
